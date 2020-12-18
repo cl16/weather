@@ -5,9 +5,7 @@ import datetime
 class Caller:
 
     def __init__(self):
-        self.key = "a49f7332c904727f99cd4b9791a826dc"
-        
-       
+        self.key = "a49f7332c904727f99cd4b9791a826dc" 
 
     def current_data(self, city):
         current_data_url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={self.key}"
@@ -15,7 +13,6 @@ class Caller:
         j = requests.get(current_data_url).json()
         return (call_time, j)
         
-
 
 class CurrentReport:
 
@@ -35,7 +32,8 @@ class CurrentReport:
         self.city = self.json["name"]
         self.weather = self.json["weather"]
         self.numeric = self.json["main"]
-        self.celsius = float(self.numeric["temp"]) - 273.15     # Convert from Kelvin to Celsius
+        self.celsius = round(float(self.numeric["temp"]) - 273.15, 2)           # Convert from Kelvin to Celsius
+        self.feels = round(float(self.json["main"]["feels_like"]) - 273.15, 2)  # Convert from Kelvin to Celsius
 
     def get_city(self):
         """
@@ -64,11 +62,14 @@ class CurrentReport:
         """
         return str(self.celsius)
 
-
+    def get_feels(self):
+        """
+        Return String of "feels-like" temperature.
+        """
+        return str(self.feels)
 
 
 if __name__ == "__main__":
     c = Caller()
     r = c.current_data("Toronto")
     cr = CurrentReport(r)
-    print(cr.get_date())
