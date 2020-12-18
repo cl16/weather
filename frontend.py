@@ -16,9 +16,9 @@ class WeatherReport(tk.Frame):
         self.frm_entry = tk.Frame(self)
         self.ent_location = tk.Entry(self.frm_entry)
         self.btn_request = tk.Button(self.frm_entry, text="Get Report", command=self.make_request)
-        self.frm_entry.pack()
-        self.ent_location.pack(side=tk.LEFT)
-        self.btn_request.pack(side=tk.RIGHT)
+        self.frm_entry.grid(row=0)
+        self.ent_location.grid(row=0, column=0)
+        self.btn_request.grid(row=0, column=1)
 
     def create_report_frame(self):
         
@@ -29,29 +29,28 @@ class WeatherReport(tk.Frame):
         
         self.frm_data = tk.Frame(self.frm_report)
         self.frm_timestamp = tk.Frame(self.frm_data)
-        self.lbl_timestamp_title = tk.Label(self.frm_timestamp, text="Data Timestamp")
-        self.lbl_timestamp_value = tk.Label(self.frm_timestamp, text="")
-        self.frm_temp = tk.Frame(self.frm_data)
-        self.lbl_temp_title = tk.Label(self.frm_temp, text="Temperature")
-        self.lbl_temp_value = tk.Label(self.frm_temp, text="N/A")
-        self.frm_class = tk.Frame(self.frm_data)
-        self.lbl_class_title = tk.Label(self.frm_class, text="Weather")
-        self.lbl_class_value = tk.Label(self.frm_class, text="")
+        self.lbl_timestamp_title = tk.Label(self.frm_data, text="Data Timestamp", bg="white")
+        self.lbl_timestamp_value = tk.Label(self.frm_data, text="")
+
+        self.lbl_temp_title = tk.Label(self.frm_data, text="Temperature", bg="white")
+        self.lbl_temp_value = tk.Label(self.frm_data, text="N/A")
+
+        self.lbl_class_title = tk.Label(self.frm_data, text="Weather", bg="white")
+        self.lbl_class_value = tk.Label(self.frm_data, text="")
         
         # pack items:
-        self.frm_report.pack()
-        self.frm_title.pack()
-        self.lbl_location.pack()
-        self.frm_data.pack()
-        self.frm_timestamp.pack()
-        self.lbl_timestamp_title.pack(side=tk.LEFT)
-        self.lbl_timestamp_value.pack(side=tk.RIGHT)
-        self.frm_temp.pack()
-        self.lbl_temp_title.pack(side=tk.LEFT)
-        self.lbl_temp_value.pack(side=tk.RIGHT)
-        self.frm_class.pack()
-        self.lbl_class_title.pack(side=tk.LEFT)
-        self.lbl_class_value.pack(side=tk.RIGHT)
+        
+        self.frm_report.grid(row=1)
+        self.frm_title.grid(row=0)
+
+        self.frm_data.grid(row=1)
+
+        self.lbl_timestamp_title.grid(row=0, column=0)
+        self.lbl_timestamp_value.grid(row=0, column=1)
+        self.lbl_temp_title.grid(row=1, column=0)
+        self.lbl_temp_value.grid(row=1, column=1)
+        self.lbl_class_title.grid(row=2, column=0)
+        self.lbl_class_value.grid(row=2, column=1)
 
     def get_location_field(self):
         self.location_text = self.ent_location.get()
@@ -76,5 +75,6 @@ class WeatherReport(tk.Frame):
 
 
 root=tk.Tk()
+root.geometry("500x500")
 window = WeatherReport(root)
 window.mainloop()
