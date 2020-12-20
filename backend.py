@@ -1,13 +1,20 @@
 import requests
 import datetime
+from dotenv import load_dotenv
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+env_file = "keys.env"
+
 
 
 class Caller:
 
     def __init__(self):
-        self.key = "a49f7332c904727f99cd4b9791a826dc" 
+        load_dotenv(os.path.join(basedir, env_file))
+        self.key = os.getenv("API_KEY")
         self.api_response = None
-
+        
     def response(self):
         """Return bool, True if response 200, False if response 404 or other, but return None if not called yet."""
         if self.api_response == 200:
