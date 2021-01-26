@@ -1,2 +1,2 @@
 # weather
-Weather Information from OpenWeather API
+Simple GUI to requst and display weather information from OpenWeather API.
